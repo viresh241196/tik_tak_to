@@ -45,13 +45,23 @@ public class TikTakTo {
         }
     }
 
+    public static void tossToBegin(){
+        int toss = (int)Math.floor(Math.random() * 10) % 2;
+        if (toss == 0){
+            System.out.println("Player1 is your change to play");
+        }else {
+            System.out.println("computer is your change to play");
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println("welcome to TikTakTo");
         char[] board = createBoard();
         char player = makeChoice();
-        displayBoard(board);
-        makeMove(board,player);
-        displayBoard(board);
+        tossToBegin();
+//        displayBoard(board);
+//        makeMove(board,player);
+//        displayBoard(board);
     }
 
 }
