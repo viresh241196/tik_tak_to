@@ -9,7 +9,7 @@ public class TikTakTo {
         return board;
     }
 
-    public static void makeChoice() {
+    public static char makeChoice() {
         Scanner obj = new Scanner(System.in);
         System.out.println("enter what you want X or O ");
         char player1 = obj.next().charAt(0);
@@ -22,6 +22,7 @@ public class TikTakTo {
             System.out.println("invalid");
         }
         System.out.println("player is " + player1 + " " + "computer is " + computer);
+        return player1;
     }
 
     public static void displayBoard(char[] board) {
@@ -30,17 +31,15 @@ public class TikTakTo {
         System.out.println(board[4] + "|" + board[5] + "|" + board[6]);
         System.out.println("------");
         System.out.println(board[7] + "|" + board[8] + "|" + board[9]);
-        System.out.println(board);
-
     }
 
-    public static void makeMove(char[] board) {
+    public static void makeMove(char[] board,char player1) {
         Scanner obj = new Scanner(System.in);
         System.out.println("enter a location number ");
         int location = obj.nextInt();
         if (0 < location && location < 10) {
             if (board[location] == ' ') {
-                System.out.println("your input is valid");
+                board[location] = player1;
             } else
                 System.out.println("invalid");
         }
@@ -49,8 +48,10 @@ public class TikTakTo {
     public static void main(String[] args) {
         System.out.println("welcome to TikTakTo");
         char[] board = createBoard();
-//        makeChoice();
+        char player = makeChoice();
         displayBoard(board);
-        makeMove(board);
+        makeMove(board,player);
+        displayBoard(board);
     }
+
 }
