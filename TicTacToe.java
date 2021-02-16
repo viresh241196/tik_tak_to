@@ -13,16 +13,15 @@ public class  TicTacToe {
     public static void makeChoice() {
         Scanner obj = new Scanner(System.in);
         System.out.println("enter what you want X or O ");
-        char player1 = obj.next().charAt(0);
+        char player = obj.next().charAt(0);
         char computer = ' ';
-        if (player1 == 'X' || player1 == 'x') {
+        if (player == 'X' || player == 'x') {
             computer = 'O';
-        } else if (player1 == 'O' || player1 == 'o') {
+        } else if (player == 'O' || player == 'o') {
             computer = 'X';
         } else {
             System.out.println("invalid");
         }
-        System.out.println("player is " + player1 + " " + "computer is " + computer);
     }
     //display board
     public static void displayBoard(char[] board) {
@@ -50,7 +49,7 @@ public class  TicTacToe {
     public static void main(String[] args) {
         System.out.println("welcome to TikTakTo");
         char[] board = createBoard();
-//        makeChoice();
+        makeChoice();
         displayBoard(board);
         makeMove(board);
     }
