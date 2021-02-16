@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
-public class TikTakTo {
+public class  TicTacToe {
+    //creating board
     public static char[] createBoard() {
         char[] board = new char[10];
         for (int i = 1; i < board.length; i++) {
@@ -8,7 +9,7 @@ public class TikTakTo {
         }
         return board;
     }
-
+    //creating make choice for x or o
     public static void makeChoice() {
         Scanner obj = new Scanner(System.in);
         System.out.println("enter what you want X or O ");
@@ -23,7 +24,7 @@ public class TikTakTo {
         }
         System.out.println("player is " + player1 + " " + "computer is " + computer);
     }
-
+    //display board
     public static void displayBoard(char[] board) {
         System.out.println(board[1] + "|" + board[2] + "|" + board[3]);
         System.out.println("------");
@@ -31,9 +32,9 @@ public class TikTakTo {
         System.out.println("------");
         System.out.println(board[7] + "|" + board[8] + "|" + board[9]);
         System.out.println(board);
-
     }
 
+    //make move only if location is empty
     public static void makeMove(char[] board) {
         Scanner obj = new Scanner(System.in);
         System.out.println("enter a location number ");
