@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class TicTacToe {
+    //creating board
     public static char[] createBoard() {
         char[] board = new char[10];
         for (int i = 1; i < board.length; i++) {
@@ -8,7 +9,7 @@ public class TicTacToe {
         }
         return board;
     }
-//creating board
+//creating make choice for x or o
     public static void makeChoice() {
         Scanner obj = new Scanner(System.in);
         System.out.println("enter what you want X or O ");
