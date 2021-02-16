@@ -13,17 +13,16 @@ public class TicTacToe {
     public static char makeChoice() {
         Scanner obj = new Scanner(System.in);
         System.out.println("enter what you want X or O ");
-        char player1 = obj.next().charAt(0);
+        char player = obj.next().charAt(0);
         char computer = ' ';
-        if (player1 == 'X' || player1 == 'x') {
+        if (player == 'X' || player == 'x') {
             computer = 'O';
-        } else if (player1 == 'O' || player1 == 'o') {
+        } else if (player == 'O' || player == 'o') {
             computer = 'X';
         } else {
             System.out.println("invalid");
         }
-        System.out.println("player is " + player1 + " " + "computer is " + computer);
-        return player1;
+        return player;
     }
     //display board
     public static void displayBoard(char[] board) {
@@ -34,13 +33,13 @@ public class TicTacToe {
         System.out.println(board[7] + "|" + board[8] + "|" + board[9]);
     }
     //make move only if location is empty and added player value
-    public static void makeMove(char[] board,char player1) {
+    public static void makeMove(char[] board,char player) {
         Scanner obj = new Scanner(System.in);
         System.out.println("enter a location number ");
         int location = obj.nextInt();
         if (0 < location && location < 10) {
             if (board[location] == ' ') {
-                board[location] = player1;
+                board[location] = player;
             } else
                 System.out.println("invalid");
         }
@@ -54,5 +53,4 @@ public class TicTacToe {
         makeMove(board,player);
         displayBoard(board);
     }
-
 }
