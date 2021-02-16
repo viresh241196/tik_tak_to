@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class TikTakTo {
+public class TicTacToe {
     public static char[] createBoard() {
         char[] board = new char[10];
         for (int i = 1; i < board.length; i++) {
@@ -33,7 +33,7 @@ public class TikTakTo {
         System.out.println(board[7] + "|" + board[8] + "|" + board[9]);
     }
 
-    public static void makeMove(char[] board,char player1) {
+    public static void makeMove(char[] board, char player1) {
         Scanner obj = new Scanner(System.in);
         System.out.println("enter a location number ");
         int location = obj.nextInt();
@@ -45,19 +45,50 @@ public class TikTakTo {
         }
     }
 
-    public static void tossToBegin(){
-        int toss = (int)Math.floor(Math.random() * 10) % 2;
-        if (toss == 0){
+    public static void tossToBegin() {
+        int toss = (int) Math.floor(Math.random() * 10) % 2;
+        if (toss == 0) {
             System.out.println("Player1 is your change to play");
-        }else {
+        } else {
             System.out.println("computer is your change to play");
         }
     }
 
+    public static void checkGameStatus(int gamestatus,char[] board) {
+        int result = 0;
+        if (board[1] == board[2] && board[3] == board[1] && board[1] != ' ') {
+            result = 1;
+        }
+        else if (board[4] == board[5] && board[4] == board[6] && board[4] != ' ') {
+            result = 1;
+        }
+        else if (board[7] == board[8] && board[7] == board[9] && board[7] != ' ') {
+            result = 1;
+        }
+        else if (board[1] == board[4] && board[1] == board[7] && board[1] != ' ') {
+            result = 1;
+        }
+        else if (board[2] == board[5] && board[2] == board[8] && board[2] != ' ') {
+            result = 1;
+        }
+        else if (board[3] == board[6] && board[3] == board[9] && board[3] != ' ') {
+            result = 1;
+        }
+        else if (board[1] == board[5] && board[1] == board[9] && board[1] != ' ') {
+            result = 1;
+        }
+        else if (board[3] == board[5] && board[3] == board[7] && board[3] != ' ') {
+            result = 1;
+        }
+
+    }
+
     public static void main(String[] args) {
+        int gamestatus = 0;
         System.out.println("welcome to TikTakTo");
         char[] board = createBoard();
         char player = makeChoice();
+        checkGameStatus(gamestatus,board);
         tossToBegin();
 //        displayBoard(board);
 //        makeMove(board,player);
