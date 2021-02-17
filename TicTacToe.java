@@ -5,7 +5,7 @@ public class TicTacToe {
     public char userChoice;
     public int counter = 0;
     public char[] board;
-
+    //    create board
     public char[] createBoard() {
         board = new char[10];
         for (int i = 1; i < board.length; i++) {
@@ -13,7 +13,7 @@ public class TicTacToe {
         }
         return board;
     }
-
+    //creating make choice for x or o
     public void makeChoice() {
         Scanner obj = new Scanner(System.in);
         System.out.println("enter what you want X or O ");
@@ -30,7 +30,7 @@ public class TicTacToe {
         }
         System.out.println("player is " + userChoice + " " + "computer is " + computerChoice);
     }
-
+    //display board
     public static void displayBoard(char[] board) {
         System.out.println(board[1] + "|" + board[2] + "|" + board[3]);
         System.out.println("------");
@@ -38,7 +38,7 @@ public class TicTacToe {
         System.out.println("------");
         System.out.println(board[7] + "|" + board[8] + "|" + board[9]);
     }
-
+    //if location is empty and added player value
     public boolean validateMove(int location) {
         if (0 < location && location < 10) {
             if (board[location] != ' ') return false;
@@ -46,7 +46,7 @@ public class TicTacToe {
         }
         return false;
     }
-
+    //make move for user only
     public void makeUserMove() {
         Scanner obj = new Scanner(System.in);
         System.out.println("enter a location number ");
@@ -57,25 +57,43 @@ public class TicTacToe {
             checkGameStatus("User");
         } else {
             System.out.println("Sorry you have selected the wrong position try again");
-            if(counter<=9) makeUserMove();
+            if (counter <= 9) makeUserMove();
             else return;
         }
     }
-
+    //computer move
     public void makeComputerMove() {
         int move = (int) Math.floor(Math.random() * 10) % 9 + 1;
         System.out.println("Wait its computers turn now");
-        if (validateMove(move)) {
-            board[move] = computerChoice;
-            System.out.println(move);
+        int bestmove = computerBestMoveVertical();
+        if (bestmove != 0) {
+            board[bestmove] = computerChoice;
+            System.out.println(bestmove);
             counter++;
             checkGameStatus("Computer");
-        } else {
-            if(counter<=9) makeComputerMove();
-            else return;
+            return;
+        }
+        bestmove = computerBestMoveHorizontal();
+        if (bestmove != 0) {
+            board[bestmove] = computerChoice;
+            System.out.println(bestmove);
+            counter++;
+            checkGameStatus("Computer");
+            return;
+        }
+        if (bestmove == 0) {
+            if (validateMove(move)) {
+                board[move] = computerChoice;
+                System.out.println(move);
+                counter++;
+                checkGameStatus("Computer");
+            } else {
+                if (counter <= 9) makeComputerMove();
+                else return;
+            }
         }
     }
-
+    //who play first
     public static boolean tossToBegin() {
         int toss = (int) Math.floor(Math.random() * 10) % 2;
         if (toss == 0) {
@@ -86,11 +104,54 @@ public class TicTacToe {
             return true;
         }
     }
-
+    //check condition if win
     public boolean allEqual(int a, int b, int c) {
         return (a == c) && (b == c);
     }
+    //check condition to win
+    public boolean twoEqual(char a,char b) {
+        return (a == b) && a == computerChoice;
+    }
+    //check if computer can make best move in horizontal
+    public int computerBestMoveHorizontal() {
+        for (int i = 1; i < 10; i = i + 3) {
+            if (twoEqual(board[i] , board[i + 1]) && board[i + 2] == ' ') {
+                return i + 2;
+            }
+        }
+        for (int i = 1; i < 10; i = i + 3) {
+            if (twoEqual(board[i], board[i + 2]) && board[i + 1] == ' ') {
+                return i + 1;
+            }
+        }
+        for (int i = 1; i < 10; i = i + 3) {
+            if (twoEqual(board[i + 1] , board[i + 2]) && board[i] == ' ') {
+                return i;
+            }
+        }
+        return 0;
+    }
+    //check if computer can make best move in vertical
+    public int computerBestMoveVertical() {
+        for (int i = 1; i < 3; i = i + 1) {
+            if (twoEqual(board[i] , board[i + 3]) && board[i + 6] == ' ') {
+                return i + 6;
+            }
+        }
+        for (int i = 1; i < 3; i = i + 1) {
+            if (twoEqual(board[i] , board[i + 6]) && board[i + 3] == ' ') {
+                return i + 3;
+            }
+        }
+        for (int i = 1; i < 3; i = i + 1) {
+            if (twoEqual(board[i + 3] , board[i + 6]) && board[i] == ' ') {
+                return i;
+            }
+        }
+        return 0;
+    }
 
+    //check game status whether win tie lose
     public void checkGameStatus(String key) {
         displayBoard(board);
         // System.out.println(counter);
@@ -115,8 +176,8 @@ public class TicTacToe {
                 System.out.println(key + " has won the game");
                 return;
             }
-            if (key.equals("Computer") && counter <9) makeUserMove();
-            else if (key.equals("User") && counter <9) makeComputerMove();
+            if (key.equals("Computer") && counter < 9) makeUserMove();
+            else if (key.equals("User") && counter < 9) makeComputerMove();
             else System.out.println("it's a tie");
         }
     }
