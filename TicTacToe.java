@@ -65,7 +65,7 @@ public class TicTacToe {
     public void makeComputerMove() {
         int move = (int) Math.floor(Math.random() * 10) % 9 + 1;
         System.out.println("Wait its computers turn now");
-        int bestmove = computerBestMoveVertical();
+        int bestmove = computerWinMove();
         if (bestmove != 0) {
             board[bestmove] = computerChoice;
             System.out.println(bestmove);
@@ -73,7 +73,7 @@ public class TicTacToe {
             checkGameStatus("Computer");
             return;
         }
-        bestmove = computerBestMoveHorizontal();
+        bestmove = computerBlockMove();
         if (bestmove != 0) {
             board[bestmove] = computerChoice;
             System.out.println(bestmove);
@@ -112,8 +112,8 @@ public class TicTacToe {
     public boolean twoEqual(char a,char b) {
         return (a == b) && a == computerChoice;
     }
-    //check if computer can make best move in horizontal
-    public int computerBestMoveHorizontal() {
+    //check if computer can make best move
+    public int computerWinMove() {
         for (int i = 1; i < 10; i = i + 3) {
             if (twoEqual(board[i] , board[i + 1]) && board[i + 2] == ' ') {
                 return i + 2;
@@ -129,10 +129,6 @@ public class TicTacToe {
                 return i;
             }
         }
-        return 0;
-    }
-    //check if computer can make best move in vertical
-    public int computerBestMoveVertical() {
         for (int i = 1; i < 3; i = i + 1) {
             if (twoEqual(board[i] , board[i + 3]) && board[i + 6] == ' ') {
                 return i + 6;
@@ -145,6 +141,43 @@ public class TicTacToe {
         }
         for (int i = 1; i < 3; i = i + 1) {
             if (twoEqual(board[i + 3] , board[i + 6]) && board[i] == ' ') {
+                return i;
+            }
+        }
+        return 0;
+    }
+    public boolean checkToBlock(char a,char b) {
+        return (a == b) && a == userChoice;
+    }
+    //check if computer can block user
+    public int computerBlockMove() {
+        for (int i = 1; i < 10; i = i + 3) {
+            if (checkToBlock(board[i] , board[i + 1]) && board[i + 2] == ' ') {
+                return i + 2;
+            }
+        }
+        for (int i = 1; i < 10; i = i + 3) {
+            if (checkToBlock(board[i], board[i + 2]) && board[i + 1] == ' ') {
+                return i + 1;
+            }
+        }
+        for (int i = 1; i < 10; i = i + 3) {
+            if (checkToBlock(board[i + 1] , board[i + 2]) && board[i] == ' ') {
+                return i;
+            }
+        }
+        for (int i = 1; i < 3; i = i + 1) {
+            if (checkToBlock(board[i] , board[i + 3]) && board[i + 6] == ' ') {
+                return i + 6;
+            }
+        }
+        for (int i = 1; i < 3; i = i + 1) {
+            if (checkToBlock(board[i] , board[i + 6]) && board[i + 3] == ' ') {
+                return i + 3;
+            }
+        }
+        for (int i = 1; i < 3; i = i + 1) {
+            if (checkToBlock(board[i + 3] , board[i + 6]) && board[i] == ' ') {
                 return i;
             }
         }
