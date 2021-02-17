@@ -95,6 +95,14 @@ public class TicTacToe {
             checkGameStatus("Computer");
             return;
         }
+        bestmove = getCenter();
+        if (bestmove != 0){
+            board[bestmove] = computerChoice;
+            System.out.println(bestmove);
+            counter++;
+            checkGameStatus("Computer");
+            return;
+        }
         if (bestmove == 0) {
             if (validateMove(move)) {
                 board[move] = computerChoice;
@@ -209,6 +217,10 @@ public class TicTacToe {
         else if (board[3] == ' ') return 3;
         else if (board[7] == ' ') return 7;
         else if (board[9] == ' ') return 9;
+        return 0;
+    }
+    public int getCenter(){
+        if (board[5]==' ') return 5;
         return 0;
     }
 
