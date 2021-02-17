@@ -1,9 +1,11 @@
 import java.util.Scanner;
+
 public class TicTacToe {
     public char computerChoice;
     public char userChoice;
     public int counter = 0;
     public char[] board;
+
     //    create board
     public char[] createBoard() {
         board = new char[10];
@@ -86,7 +88,7 @@ public class TicTacToe {
             return;
         }
         bestmove = getCorner();
-        if (bestmove != 0){
+        if (bestmove != 0) {
             board[bestmove] = computerChoice;
             System.out.println(bestmove);
             counter++;
@@ -94,7 +96,7 @@ public class TicTacToe {
             return;
         }
         bestmove = getCenter();
-        if (bestmove != 0){
+        if (bestmove != 0) {
             board[bestmove] = computerChoice;
             System.out.println(bestmove);
             counter++;
@@ -209,7 +211,8 @@ public class TicTacToe {
         }
         return 0;
     }
-//check if corner are available
+
+    //check if corner are available
     public int getCorner() {
         if (board[1] == ' ') return 1;
         else if (board[3] == ' ') return 3;
@@ -217,8 +220,9 @@ public class TicTacToe {
         else if (board[9] == ' ') return 9;
         return 0;
     }
-    public int getCenter(){
-        if (board[5]==' ') return 5;
+
+    public int getCenter() {
+        if (board[5] == ' ') return 5;
         return 0;
     }
 
@@ -254,12 +258,19 @@ public class TicTacToe {
     }
 
     public static void main(String[] args) {
-        int gamestatus = 0;
-        TicTacToe game = new TicTacToe();
-        System.out.println("welcome to TikTakToe");
-        char[] board = game.createBoard();
-        game.makeChoice();
-        if (tossToBegin()) game.makeComputerMove();
-        else game.makeUserMove();
+        Scanner scan = new Scanner(System.in);
+        boolean gamestatus = true;
+        while (gamestatus) {
+            TicTacToe game = new TicTacToe();
+            System.out.println("welcome to TikTakToe");
+            char[] board = game.createBoard();
+            game.makeChoice();
+            if (tossToBegin()) game.makeComputerMove();
+            else game.makeUserMove();
+            System.out.println("Want to play again Y or N");
+            char playAgain = scan.next().charAt(0);
+            if (playAgain=='n'||playAgain=='N') gamestatus=false;
+
+        }
     }
 }
