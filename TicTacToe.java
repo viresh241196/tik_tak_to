@@ -1,11 +1,9 @@
 import java.util.Scanner;
-
 public class TicTacToe {
     public char computerChoice;
     public char userChoice;
     public int counter = 0;
     public char[] board;
-
     //    create board
     public char[] createBoard() {
         board = new char[10];
